@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Семья+ — ВТБ Онлайн</title>
+<style>
+  :root {
+    --primary: #002882;
+    --primary-600: #1E40AF;
+    --primary-500: #3B82F6;
+    --primary-100: #DBE6FF;
+    --primary-50: #EFF4FF;
+    --bg: #F1F3F6;
+    --card: #FFFFFF;
+    --text: #0F172A;
+    --text-2: #475569;
+    --muted: #94A3B8;
+    --border: #E2E8F0;
+    --border-strong: #CBD5E1;
+    --success: #15803D;
+    --success-bg: #DCFCE7;
+    --danger: #B91C1C;
+    --warning: #B45309;
+    --radius: 14px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 24px 16px;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .phone {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card);
+    border-radius: 20px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 72px;
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- Header ---------- */
+  .topbar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .brand .vtb { font-size: 18px; color: var(--primary); letter-spacing: 0.02em; }
+  .brand .sep { color: var(--muted); font-weight: 400; }
+  .brand .fam { font-size: 14px; color: var(--text); font-weight: 600; }
+
+  .top-actions { display: flex; gap: 4px; align-items: center; }
+
+  .icon-btn {
+    width: 36px; height: 36px; border-radius: 10px;
+    border: 0; cursor: pointer;
+    background: transparent;
+    color: var(--text-2);
+    display: grid; place-items: center;
+    position: relative;
+    transition: background 0.15s;
+  }
+  .icon-btn:hover { background: var(--bg); }
+
+  .icon-btn .dot {
+    position: absolute; top: 8px; right: 8px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--danger);
+    border: 1.5px solid var(--card);
+  }
+
+  .avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--primary-50);
+    color: var(--primary);
+    display: grid; place-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    margin-left: 4px;
+  }
+
+  /* ---------- Segmented control ---------- */
+  .role-wrap {
+    padding: 14px 16px 4px;
+    background: var(--card);
+  }
+
+  .segmented {
+    display: flex;
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .segmented button {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: 0.15s ease;
+  }
+
+  .segmented button.active {
+    background: var(--card);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  }
+
+  /* ---------- Main ---------- */
+  main {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .page-head { padding: 4px 2px 6px; }
+  .page-head h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+  .page-head p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .card h2 .right {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .muted { color: var(--muted); font-size: 12.5px; line-height: 1.45; margin: 4px 0 0; }
+
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .row.small { font-size: 12.5px; color: var(--text-2); margin-top: 8px; }
+
+  /* ---------- Balance card ---------- */
+  .balance-card {
+    background: var(--primary);
+    color: #fff;
+    border: 0;
+    padding: 18px;
+  }
+
+  .balance-card .label {
+    font-size: 12px;
+    opacity: 0.75;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .balance-card .amount {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 6px 0 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .balance-card .progress {
+    background: rgba(255, 255, 255, 0.15);
+    margin: 12px 0 8px;
+  }
+
+  .balance-card .progress > div {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .balance-card .sub {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    opacity: 0.85;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress {
+    width: 100%;
+    height: 6px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+  .progress > div {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--primary-500);
+    transition: width 0.4s cubic-bezier(.4, 0, .2, 1);
+  }
+  .progress.success > div { background: var(--success); }
+
+  /* ---------- Insight card ---------- */
+  .insight-card {
+    background: var(--primary-50);
+    border-color: var(--primary-100);
+  }
+
+  .insight-card .title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .insight-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-2);
+  }
+
+  .insight-card .chip {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: var(--card);
+    border: 1px solid var(--primary-100);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--primary);
+  }
+
+  /* ---------- Pills ---------- */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 500;
+    background: var(--bg);
+    color: var(--text-2);
+    white-space: nowrap;
+  }
+  .pill.primary { background: var(--primary-50); color: var(--primary); }
+  .pill.success { background: var(--success-bg); color: var(--success); }
+  .pill.danger { background: #FEE2E2; color: var(--danger); }
+  .pill.muted { background: var(--bg); color: var(--muted); }
+
+  /* ---------- Categories donut ---------- */
+  .chart-row {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  .donut-wrap {
+    position: relative;
+    width: 132px;
+    height: 132px;
+  }
+  .donut-wrap svg { transform: rotate(-90deg); display: block; }
+  .donut-center {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    pointer-events: none;
+  }
+  .donut-center strong {
+    font-size: 15px;
+    display: block;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .donut-center span { font-size: 10.5px; color: var(--muted); }
+
+  .legend { display: flex; flex-direction: column; gap: 7px; font-size: 12.5px; }
+  .legend .item { display: flex; align-items: center; gap: 8px; }
+  .legend .swatch { width: 8px; height: 8px; border-radius: 2px; flex: 0 0 auto; }
+  .legend .name { flex: 1; color: var(--text-2); }
+  .legend .val {
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+  }
+
+  /* ---------- Bars ---------- */
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 100px;
+    padding: 8px 2px 0;
+    margin-top: 4px;
+  }
+  .bars .bar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+  .bars .bar .fill {
+    width: 100%;
+    border-radius: 4px 4px 2px 2px;
+    background: var(--primary-100);
+    min-height: 4px;
+    transition: height 0.5s ease;
+  }
+  .bars .bar.today .fill { background: var(--primary); }
+  .bars .bar span {
+    font-size: 10.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .bars .bar strong {
+    font-size: 10.5px;
+    color: var(--text-2);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Members ---------- */
+  .members { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+
+  .member {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .member:first-child { border-top: 0; padding-top: 4px; }
+
+  .member .av {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .member .av.p1 { background: #002882; }
+  .member .av.p2 { background: #0D9488; }
+  .member .av.p3 { background: #3B82F6; }
+  .member .av.p4 { background: #64748B; }
+
+  .member .info strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .member .info span {
+    font-size: 11.5px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+  .member .info .progress {
+    height: 4px;
+    margin: 6px 0 4px;
+  }
+
+  .member .amount {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .member .amount strong {
+    font-size: 13px;
+    font-weight: 600;
+    display: block;
+  }
+  .member .amount span {
+    font-size: 11px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ---------- Goals ---------- */
+  .goal {
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+  .goal:first-of-type { margin-top: 6px; }
+
+  .goal .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .goal .head .ico-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: var(--primary-50);
+    color: var(--primary);
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+
+  .goal .head .title-block { flex: 1; min-width: 0; }
+  .goal .head h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .goal .head .deadline {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .goal .head .percent {
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary);
+  }
+
+  .goal .amounts {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .goal .amounts strong { color: var(--text); font-weight: 600; }
+
+  .goal .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    border: 0;
+    border-radius: 9px;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.15s;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.98); }
+
+  .btn.primary {
+    background: var(--primary);
+    color: #fff;
+  }
+  .btn.primary:hover { background: var(--primary-600); }
+
+  .btn.secondary {
+    background: var(--bg);
+    color: var(--text);
+  }
+  .btn.secondary:hover { background: #E5E9F0; }
+
+  .btn.outline {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+  }
+  .btn.outline:hover { background: var(--bg); }
+
+  .btn.small {
+    padding: 7px 11px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-link {
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 0;
+    font-family: inherit;
+  }
+
+  /* ---------- Missions ---------- */
+  .mission {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+  }
+  .mission:first-of-type { border-top: 0; padding-top: 6px; }
+  .mission.done { opacity: 0.55; }
+
+  .mission .ico-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    background: var(--primary-50);
+    color: var(--primary);
+    flex: 0 0 auto;
+  }
+  .mission.done .ico-box { background: var(--success-bg); color: var(--success); }
+
+  .mission .body strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .mission .body p {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .mission .body .meta {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  .mission .reward {
+    color: var(--success);
+    font-weight: 600;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .mission .action { grid-column: 2 / 4; margin-top: 4px; }
+
+  /* ---------- Transactions ---------- */
+  .filters {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 2px 0 8px;
+    margin-top: 8px;
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+
+  .filters button {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text-2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .filters button.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .txn {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .txn:first-of-type { border-top: 0; }
+
+  .txn .ic {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    color: var(--text-2);
+  }
+
+  .txn .info strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .txn .info span {
+    font-size: 11.5px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .txn .amt {
+    font-weight: 600;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .txn .amt.neg { color: var(--text); }
+  .txn .amt.pos { color: var(--success); }
+
+  /* ---------- Feed ---------- */
+  .feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 8px;
+  }
+  .feed-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    font-size: 12.5px;
+  }
+  .feed-item:first-child { border-top: 0; padding-top: 4px; }
+
+  .feed-item .fi-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    background: var(--primary-50);
+    color: var(--primary);
+    flex: 0 0 auto;
+  }
+
+  .feed-item strong {
+    display: block;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .feed-item .time {
+    color: var(--muted);
+    font-size: 11.5px;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ---------- Settings / switches ---------- */
+  .setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    gap: 12px;
+  }
+  .setting:first-of-type { border-top: 0; padding-top: 6px; }
+  .setting .info strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+  .setting .info span {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+    display: block;
+  }
+
+  .switch {
+    position: relative;
+    width: 40px;
+    height: 24px;
+    border-radius: 12px;
+    background: var(--border-strong);
+    cursor: pointer;
+    border: 0;
+    transition: background 0.2s;
+    flex: 0 0 auto;
+  }
+  .switch::after {
+    content: "";
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    transition: 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .switch.on { background: var(--primary); }
+  .switch.on::after { left: 19px; }
+
+  /* ---------- Inputs ---------- */
+  .field-label {
+    display: block;
+    margin: 12px 0 6px;
+    font-size: 12px;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .inline-form { display: flex; gap: 8px; }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 9px;
+    padding: 9px 12px;
+    font-size: 13px;
+    outline: none;
+    background: var(--card);
+    color: var(--text);
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:focus, select:focus {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  }
+
+  .search-wrap { position: relative; margin-top: 10px; }
+  .search-wrap input { padding-left: 36px; width: 100%; }
+  .search-wrap .ic {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+    display: flex;
+  }
+
+  /* ---------- Level ---------- */
+  .level-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--primary-50);
+    margin-top: 10px;
+  }
+  .level-row .lvl {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+  }
+  .level-row .info strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .level-row .info span {
+    font-size: 11.5px;
+    color: var(--text-2);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ---------- Achievements ---------- */
+  .ach-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .ach {
+    text-align: center;
+    padding: 10px 4px;
+    border-radius: 9px;
+    background: var(--bg);
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    line-height: 1.2;
+  }
+  .ach .ic-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+    color: var(--primary);
+  }
+  .ach.locked {
+    opacity: 0.45;
+    color: var(--muted);
+  }
+  .ach.locked .ic-wrap { color: var(--muted); }
+
+  /* ---------- Bottom nav ---------- */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    padding: 8px 6px 12px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    z-index: 15;
+  }
+
+  .nav-btn {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 4px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 10.5px;
+    font-weight: 500;
+    font-family: inherit;
+    transition: color 0.15s;
+  }
+  .nav-btn .ic { display: flex; }
+  .nav-btn.active { color: var(--primary); }
+  .nav-btn.active .ic { color: var(--primary); }
+
+  /* ---------- Sheet ---------- */
+  .sheet {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 100;
+  }
+  .sheet.open { display: flex; }
+
+  .sheet-inner {
+    background: var(--card);
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px 16px 0 0;
+    padding: 16px 18px 24px;
+    max-height: 72vh;
+    overflow-y: auto;
+    animation: slideUp 0.25s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .sheet-handle {
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-strong);
+    margin: 0 auto 14px;
+  }
+
+  .notif {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .notif:first-of-type { border-top: 0; padding-top: 4px; }
+  .notif .n-ic {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    background: var(--primary-50);
+    color: var(--primary);
+    flex: 0 0 auto;
+  }
+  .notif strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .notif p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 90px;
+    transform: translateX(-50%) translateY(16px);
+    background: #0F172A;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s;
+    z-index: 200;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ---------- Empty ---------- */
+  .empty {
+    text-align: center;
+    padding: 24px 10px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ---------- Info tags ---------- */
+  .tag-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .tag {
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    font-weight: 500;
+    background: var(--bg);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 420px) {
+    body { padding: 0; }
+    .phone { border-radius: 0; min-height: 100vh; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <header class="topbar">
+    <div class="brand">
+      <span class="vtb">ВТБ</span>
+      <span class="sep">·</span>
+      <span class="fam">Семья+</span>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="btnSearch" aria-label="Поиск">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" id="btnNotif" aria-label="Уведомления">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="dot"></span>
+      </button>
+      <div class="avatar" id="topAvatar">М</div>
+    </div>
+  </header>
+
+  <div class="role-wrap">
+    <div class="segmented" id="roleSwitch"></div>
+  </div>
+
+  <main id="app"></main>
+
+  <nav class="bottom-nav" id="bottomNav"></nav>
+</div>
+
+<div class="sheet" id="sheet">
+  <div class="sheet-inner" id="sheetInner"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   ICONS
+   ========================================================= */
+function icon(name, size = 18) {
+  const map = {
+    home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+    users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+    star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    more: '<circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>',
+    card: '<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>',
+    plus: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+    check: '<polyline points="20 6 9 17 4 12"/>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    trending: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+    gift: '<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>',
+    trophy: '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>',
+    book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+    chart: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+    info: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+    lock: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    alert: '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+    car: '<path d="M5 17h14M5 17a2 2 0 1 1-4 0v-4l2-5h12l2 5v4a2 2 0 1 1-4 0M5 17h10"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>',
+    plane: '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
+    phone: '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>',
+    bike: '<circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM12 17.5V14l-3-3 4-3 2 3h2"/>',
+    chevron: '<polyline points="9 18 15 12 9 6"/>',
+  };
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${map[name] || ''}</svg>`;
+}
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const state = {
+  role: "parent",
+  tab: "home",
+  searchQuery: "",
+  filter: "all",
+
+  family: [
+    { id: 1, name: "Марат Квитковский", role: "parent", initial: "М", tag: "Отец · основной плательщик" },
+    { id: 2, name: "Диана Квитковская", role: "parent", initial: "Д", tag: "Мать · аналитика бюджета" },
+    { id: 3, name: "Карина",            role: "teen",   initial: "К", tag: "Подросток, 14 лет", balance: 1250, limit: 3000 },
+    { id: 4, name: "Лиана",             role: "child",  initial: "Л", tag: "Ребёнок, 9 лет",    balance: 480,  limit: 1500 }
+  ],
+
+  budget: 120000,
+  spent: 32100,
+  categories: [
+    { id: "food",      name: "Продукты",    amount: 12400, color: "#002882" },
+    { id: "transport", name: "Транспорт",   amount: 6200,  color: "#1E40AF" },
+    { id: "fun",       name: "Развлечения", amount: 4800,  color: "#3B82F6" },
+    { id: "kids",      name: "Дети",        amount: 3900,  color: "#93C5FD" },
+    { id: "other",     name: "Прочее",      amount: 4800,  color: "#CBD5E1" }
+  ],
+
+  weekly: [8200, 5100, 9400, 3800, 6100, 12400, 4800],
+  weekDays: ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"],
+
+  goals: [
+    { id: "vacation", title: "Отпуск в Сочи", icon: "plane", target: 120000, current: 54000, deadline: "Август 2026" },
+    { id: "bike",     title: "Велосипед",     icon: "bike",  target: 25000,  current: 12000, deadline: "Июль 2026" },
+    { id: "phone",    title: "Новый телефон", icon: "phone", target: 60000,  current: 8000,  deadline: "Декабрь 2026" }
+  ],
+
+  missions: [
+    { id: 1, title: "Неделя без импульсивных покупок", desc: "Откладывайте 100 ₽ вместо спонтанной покупки", reward: 300, done: false, tag: "финансы" },
+    { id: 2, title: "Первый вклад в семейную цель",     desc: "Внесите сумму в цель «Велосипед»",              reward: 200, done: true,  tag: "цели" },
+    { id: 3, title: "Разбор категорий трат",            desc: "Изучите, на что ушли деньги за неделю",          reward: 150, done: false, tag: "аналитика" },
+    { id: 4, title: "Урок: что такое инфляция",         desc: "Короткий урок и тест, 5 минут",                   reward: 100, done: false, tag: "обучение" }
+  ],
+
+  transactions: [
+    { icon: "card", title: "Пятёрочка",         cat: "food",      amount: -2340, who: "Марат",  date: "Сегодня, 19:42" },
+    { icon: "gift", title: "Награда за миссию", cat: "gift",      amount: 300,   who: "Карина", date: "Сегодня, 18:10" },
+    { icon: "car",  title: "АЗС Лукойл",        cat: "transport", amount: -4100, who: "Марат",  date: "Сегодня, 12:05" },
+    { icon: "card", title: "Вкусно и точка",    cat: "food",      amount: -890,  who: "Карина", date: "Вчера, 20:15" },
+    { icon: "card", title: "Игровой скин",      cat: "game",      amount: -250,  who: "Лиана",  date: "Вчера, 16:30" },
+    { icon: "card", title: "Транспорт",         cat: "transport", amount: -120,  who: "Карина", date: "Вчера, 08:15" }
+  ],
+
+  activity: [
+    { icon: "target",   text: "Карина внесла 300 ₽ в цель «Велосипед»",        time: "10 минут назад" },
+    { icon: "check",    text: "Лиана выполнила задание «Первый вклад»",          time: "1 час назад" },
+    { icon: "card",     text: "Марат установил лимит для Карины — 3 000 ₽",      time: "3 часа назад" },
+    { icon: "trending", text: "Аналитика: расходы в категории «Кафе» +12%",      time: "Вчера" }
+  ],
+
+  notifications: [
+    { icon: "target",   title: "Цель приближается", text: "«Велосипед» — 48%. Осталось 13 000 ₽.",          kind: "primary" },
+    { icon: "trending", title: "Аналитика расходов", text: "Сокращение категории «Кафе» на 10% ускорит цель «Отпуск» на 2 недели.", kind: "primary" },
+    { icon: "star",     title: "Новое задание",     text: "«Урок: инфляция» ожидает выполнения.",           kind: "primary" },
+    { icon: "card",     title: "Операция по карте", text: "Карина: 890 ₽ в «Вкусно и точка».",               kind: "muted" }
+  ],
+
+  settings: {
+    pushMissions: true,
+    pushTransactions: true,
+    aiTips: true,
+    parentalControl: true
+  },
+
+  childLevel: 3,
+  childXP: 220,
+  childXPGoal: 400,
+  childAchievements: [
+    { icon: "check",   title: "Первая миссия", done: true },
+    { icon: "trending",title: "1 000 ₽",       done: true },
+    { icon: "target",  title: "Помощь цели",   done: true },
+    { icon: "book",    title: "5 уроков",      done: false },
+    { icon: "star",    title: "Серия 7 дней",  done: false },
+    { icon: "trophy",  title: "10 миссий",     done: false },
+    { icon: "trending",title: "5 000 ₽",       done: false },
+    { icon: "shield",  title: "Уровень 5",     done: false }
+  ]
+};
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+const $ = (sel) => document.querySelector(sel);
+const app = $("#app");
+const roleSwitch = $("#roleSwitch");
+const bottomNav = $("#bottomNav");
+const sheet = $("#sheet");
+const sheetInner = $("#sheetInner");
+const toastEl = $("#toast");
+
+const money = (v) =>
+  new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(Math.round(v)) + " ₽";
+const pct = (part, total) => Math.min(100, Math.round((part / Math.max(total, 1)) * 100));
+
+function childForRole() {
+  return state.family.find((m) => m.role === "teen") || state.family.find((m) => m.role === "child");
+}
+
+function toast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toastEl.classList.remove("show"), 2200);
+}
+
+/* =========================================================
+   RENDER: TOP
+   ========================================================= */
+function renderRoleSwitch() {
+  roleSwitch.innerHTML = `
+    <button data-role="parent" class="${state.role === "parent" ? "active" : ""}">Родитель</button>
+    <button data-role="child"  class="${state.role === "child"  ? "active" : ""}">Ребёнок</button>
+  `;
+}
+
+const NAV_PARENT = [
+  { id: "home",     icon: "home",   label: "Главная" },
+  { id: "family",   icon: "users",  label: "Семья" },
+  { id: "goals",    icon: "target", label: "Цели" },
+  { id: "missions", icon: "star",   label: "Задания" },
+  { id: "more",     icon: "more",   label: "Ещё" }
+];
+const NAV_CHILD = [
+  { id: "home",     icon: "home",   label: "Главная" },
+  { id: "missions", icon: "star",   label: "Задания" },
+  { id: "goals",    icon: "target", label: "Цели" },
+  { id: "ach",      icon: "trophy", label: "Награды" },
+  { id: "more",     icon: "more",   label: "Ещё" }
+];
+
+function renderNav() {
+  const items = state.role === "parent" ? NAV_PARENT : NAV_CHILD;
+  bottomNav.innerHTML = items
+    .map(
+      (it) => `
+      <button class="nav-btn ${state.tab === it.id ? "active" : ""}" data-tab="${it.id}">
+        <span class="ic">${icon(it.icon, 20)}</span>
+        <span>${it.label}</span>
+      </button>`
+    )
+    .join("");
+}
+
+/* =========================================================
+   RENDER: PARENT — HOME
+   ========================================================= */
+function parentHome() {
+  const free = state.budget - state.spent;
+  const spentPct = pct(state.spent, state.budget);
+
+  const totalCat = state.categories.reduce((s, c) => s + c.amount, 0);
+  const donutSize = 120, r = 48, cx = 60, cy = 60;
+  const C = 2 * Math.PI * r;
+  let acc = 0;
+  const segments = state.categories
+    .map((c) => {
+      const part = (c.amount / totalCat) * C;
+      const seg = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${c.color}"
+        stroke-width="14" stroke-dasharray="${part} ${C - part}"
+        stroke-dashoffset="${-acc}" stroke-linecap="butt" />`;
+      acc += part;
+      return seg;
+    })
+    .join("");
+
+  const maxW = Math.max(...state.weekly);
+  const today = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
+  const bars = state.weekly
+    .map(
+      (v, i) => `
+      <div class="bar ${i === today ? "today" : ""}">
+        <strong>${Math.round(v / 1000)}к</strong>
+        <div class="fill" style="height:${Math.max(6, (v / maxW) * 78)}%"></div>
+        <span>${state.weekDays[i]}</span>
+      </div>`
+    )
+    .join("");
+
+  return `
+    <section class="page-head">
+      <h1>Семья Квитковских</h1>
+      <p>Общий бюджет, карты и цели · июнь 2026</p>
+    </section>
+
+    <section class="card balance-card">
+      <div class="row">
+        <span class="label">Семейный бюджет</span>
+        <span class="pill" style="background:rgba(255,255,255,0.15);color:#fff;border:0">${spentPct}% использовано</span>
+      </div>
+      <div class="amount">${money(state.budget)}</div>
+      <div class="progress"><div style="width:${spentPct}%"></div></div>
+      <div class="sub">
+        <span>Потрачено: ${money(state.spent)}</span>
+        <span>Свободно: ${money(free)}</span>
+      </div>
+    </section>
+
+    <section class="card insight-card">
+      <div class="title">
+        ${icon("trending", 15)}
+        Аналитика расходов
+      </div>
+      <p>
+        Расходы в категории «Кафе» выросли на 12% за неделю.
+        Сокращение на 10% ускорит достижение цели «Отпуск» примерно на две недели.
+      </p>
+      <span class="chip">Рекомендация: установить лимит на развлечения</span>
+    </section>
+
+    <section class="card">
+      <h2>Расходы по категориям <span class="right">${money(totalCat)}</span></h2>
+      <div class="chart-row">
+        <div class="donut-wrap">
+          <svg viewBox="0 0 ${donutSize} ${donutSize}" width="132" height="132">
+            <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#F1F3F6" stroke-width="14" />
+            ${segments}
+          </svg>
+          <div class="donut-center">
+            <div>
+              <strong>${Math.round(totalCat / 1000)} тыс.</strong>
+              <span>за месяц</span>
+            </div>
+          </div>
+        </div>
+        <div class="legend">
+          ${state.categories
+            .map(
+              (c) => `
+              <div class="item">
+                <span class="swatch" style="background:${c.color}"></span>
+                <span class="name">${c.name}</span>
+                <span class="val">${Math.round(c.amount / 1000)}к</span>
+              </div>`
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Расходы за неделю <span class="right">${money(state.weekly.reduce((s, v) => s + v, 0))}</span></h2>
+      <div class="bars">${bars}</div>
+    </section>
+
+    <section class="card">
+      <h2>Участники семьи <button class="btn-link" data-action="invite-member">Пригласить</button></h2>
+      <div class="members">
+        ${state.family
+          .map(
+            (m, i) => `
+            <div class="member">
+              <div class="av p${i + 1}">${m.initial}</div>
+              <div class="info">
+                <strong>${m.name}</strong>
+                <span>${m.tag}</span>
+                ${m.limit !== undefined
+                  ? `<div class="progress"><div style="width:${pct(m.limit - m.balance, m.limit)}%"></div></div>`
+                  : ""}
+              </div>
+              <div class="amount">
+                ${m.balance !== undefined ? `<strong>${money(m.balance)}</strong>` : `<strong>—</strong>`}
+                <span>${m.limit !== undefined ? `из ${money(m.limit)}` : ""}</span>
+              </div>
+            </div>`
+          )
+          .join("")}
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Ближайшая цель <span class="right">${pct(state.goals[0].current, state.goals[0].target)}%</span></h2>
+      ${goalBlock(state.goals[0], "parent")}
+    </section>
+
+    <section class="card">
+      <h2>Лента семьи</h2>
+      <div class="feed">
+        ${state.activity
+          .map(
+            (a) => `
+            <div class="feed-item">
+              <div class="fi-icon">${icon(a.icon, 15)}</div>
+              <div>
+                <strong>${a.text}</strong>
+                <span class="time">${a.time}</span>
+              </div>
+            </div>`
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function goalBlock(goal, role) {
+  const percent = pct(goal.current, goal.target);
+  const left = goal.target - goal.current;
+  const isChild = role === "child";
+
+  return `
+    <div class="goal">
+      <div class="head">
+        <div class="ico-box">${icon(goal.icon, 18)}</div>
+        <div class="title-block">
+          <h3>${goal.title}</h3>
+          <div class="deadline">до ${goal.deadline}</div>
+        </div>
+        <div class="percent">${percent}%</div>
+      </div>
+      <div class="progress success"><div style="width:${percent}%"></div></div>
+      <div class="amounts">
+        <span><strong>${money(goal.current)}</strong> из ${money(goal.target)}</span>
+        <span>осталось ${money(left)}</span>
+      </div>
+      <div class="actions">
+        <button class="btn secondary small" data-action="contribute-goal"
+          data-goal-id="${goal.id}" data-amount="${isChild ? 100 : 5000}">
+          ${icon("plus", 14)} ${isChild ? "100 ₽" : "5 000 ₽"}
+        </button>
+        ${!isChild ? `<button class="btn outline small" data-action="custom-contribute" data-goal-id="${goal.id}">Другая сумма</button>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+/* =========================================================
+   RENDER: PARENT — FAMILY
+   ========================================================= */
+function parentFamily() {
+  return `
+    <section class="page-head">
+      <h1>Семья</h1>
+      <p>Детские карты, лимиты и права доступа</p>
+    </section>
+
+    <section class="card">
+      <h2>Детские карты</h2>
+      ${state.family
+        .filter((m) => m.role !== "parent")
+        .map(
+          (m, idx) => `
+          <div class="goal" style="margin-top:${idx === 0 ? "10px" : "10px"}">
+            <div class="head">
+              <div class="av p${idx + 3}" style="width:36px;height:36px;border-radius:9px">${m.initial}</div>
+              <div class="title-block">
+                <h3>${m.name}</h3>
+                <div class="deadline">${m.tag}</div>
+              </div>
+              <span class="pill success">активна</span>
+            </div>
+            <div class="progress"><div style="width:${pct(m.limit - m.balance, m.limit)}%"></div></div>
+            <div class="amounts">
+              <span>Баланс: <strong>${money(m.balance)}</strong></span>
+              <span>Лимит: ${money(m.limit)}</span>
+            </div>
+            <div class="inline-form" style="margin-top:10px">
+              <input type="number" min="0" step="100" value="${m.limit}" data-limit-input="${m.id}" />
+              <button class="btn primary small" data-action="save-limit" data-member-id="${m.id}">Сохранить</button>
+            </div>
+            <div class="actions">
+              <button class="btn secondary small" data-action="topup-card" data-member-id="${m.id}">${icon("plus", 14)} 500 ₽</button>
+              <button class="btn outline small" data-action="block-card" data-member-id="${m.id}">${icon("lock", 14)} Заморозить</button>
+            </div>
+          </div>`
+        )
+        .join("")}
+    </section>
+
+    <section class="card">
+      <h2>Участники <button class="btn-link" data-action="invite-member">Пригласить</button></h2>
+      <div class="members">
+        ${state.family
+          .map(
+            (m, i) => `
+            <div class="member">
+              <div class="av p${i + 1}">${m.initial}</div>
+              <div class="info">
+                <strong>${m.name}</strong>
+                <span>${m.tag}</span>
+              </div>
+              <span class="pill ${m.role === "parent" ? "primary" : m.role === "teen" ? "" : "muted"}">
+                ${m.role === "parent" ? "родитель" : m.role === "teen" ? "подросток" : "ребёнок"}
+              </span>
+            </div>`
+          )
+          .join("")}
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Приватность и контроль</h2>
+      ${privacySetting("Родительский контроль", "Проверка операций ребёнка", "parentalControl")}
+      ${privacySetting("Push по операциям", "Уведомления о тратах по картам", "pushTransactions")}
+      ${privacySetting("Аналитические советы", "Ежедневные рекомендации по бюджету", "aiTips")}
+    </section>
+  `;
+}
+
+function privacySetting(title, desc, key) {
+  return `
+    <div class="setting">
+      <div class="info">
+        <strong>${title}</strong>
+        <span>${desc}</span>
+      </div>
+      <button class="switch ${state.settings[key] ? "on" : ""}" data-toggle="${key}" aria-label="${title}"></button>
+    </div>
+  `;
+}
+
+/* =========================================================
+   RENDER: PARENT — GOALS
+   ========================================================= */
+function parentGoals() {
+  return `
+    <section class="page-head">
+      <h1>Семейные цели</h1>
+      <p>Совместные накопления и автоплатежи</p>
+    </section>
+
+    <section class="card">
+      <h2>Все цели <button class="btn-link" data-action="new-goal">Новая цель</button></h2>
+      ${state.goals.map((g) => goalBlock(g, "parent")).join("")}
+    </section>
+
+    <section class="card insight-card">
+      <div class="title">${icon("trending", 15)} План накоплений</div>
+      <p>
+        Чтобы закрыть цель «Отпуск» к августу, ежемесячный взнос должен составлять
+        около 11 000 ₽. Рекомендуем автоплатёж 5-го числа.
+      </p>
+      <button class="btn primary small" style="margin-top:10px" data-action="auto-save">Включить автоплатёж</button>
+    </section>
+  `;
+}
+
+/* =========================================================
+   RENDER: PARENT — MISSIONS
+   ========================================================= */
+function parentMissions() {
+  const doneCount = state.missions.filter((m) => m.done).length;
+  return `
+    <section class="page-head">
+      <h1>Задания и миссии</h1>
+      <p>Создавайте задания для детей и отслеживайте прогресс</p>
+    </section>
+
+    <section class="card">
+      <h2>Активные <button class="btn-link" data-action="create-task">Новое</button></h2>
+      ${state.missions.map((m) => missionBlock(m, "parent")).join("")}
+    </section>
+
+    <section class="card">
+      <h2>Прогресс ребёнка <span class="right">${doneCount} / ${state.missions.length}</span></h2>
+      <div class="progress success"><div style="width:${pct(doneCount, state.missions.length)}%"></div></div>
+      <p class="muted">Карина выполнила ${doneCount} задание на этой неделе. Регулярность — ключ к привычке.</p>
+    </section>
+  `;
+}
+
+function missionBlock(m, role) {
+  const canDo = role === "child" && !m.done;
+  return `
+    <div class="mission ${m.done ? "done" : ""}">
+      <div class="ico-box">${m.done ? icon("check", 18) : icon("star", 18)}</div>
+      <div class="body">
+        <strong>${m.title}</strong>
+        <p>${m.desc}</p>
+        <div class="meta">
+          <span class="pill">${m.tag}</span>
+          ${m.done ? `<span class="pill success">выполнено</span>` : ""}
+        </div>
+      </div>
+      <div class="reward">+${money(m.reward)}</div>
+      ${canDo
+        ? `<button class="btn primary small action" data-action="complete-mission" data-mission-id="${m.id}">Выполнить</button>`
+        : ""}
+    </div>
+  `;
+}
+
+/* =========================================================
+   RENDER: PARENT — MORE
+   ========================================================= */
+function parentMore() {
+  const q = state.searchQuery.toLowerCase();
+  const f = state.filter || "all";
+
+  const list = state.transactions.filter((t) => {
+    const matchQ = !q || t.title.toLowerCase().includes(q) || t.who.toLowerCase().includes(q);
+    const matchF = f === "all" || t.cat === f;
+    return matchQ && matchF;
+  });
+
+  return `
+    <section class="page-head">
+      <h1>Ещё</h1>
+      <p>История операций и настройки</p>
+    </section>
+
+    <section class="card">
+      <h2>Операции</h2>
+      <div class="search-wrap">
+        <span class="ic">${icon("search", 16)}</span>
+        <input type="text" placeholder="Поиск по операциям" value="${state.searchQuery}" data-search />
+      </div>
+      <div class="filters">
+        ${[
+          ["all", "Все"],
+          ["food", "Продукты"],
+          ["transport", "Транспорт"],
+          ["gift", "Награды"],
+          ["game", "Игры"]
+        ]
+          .map(
+            ([id, label]) => `<button class="${f === id ? "active" : ""}" data-filter="${id}">${label}</button>`
+          )
+          .join("")}
+      </div>
+      ${list.length === 0
+        ? `<div class="empty">Ничего не найдено</div>`
+        : list
+            .map(
+              (t) => `
+              <div class="txn">
+                <div class="ic">${icon(t.icon, 16)}</div>
+                <div class="info">
+                  <strong>${t.title}</strong>
+                  <span>${t.who} · ${t.date}</span>
+                </div>
+                <div class="amt ${t.amount < 0 ? "neg" : "pos"}">
+                  ${t.amount > 0 ? "+" : ""}${money(t.amount)}
+                </div>
+              </div>`
+            )
+            .join("")}
+    </section>
+
+    <section class="card">
+      <h2>Настройки</h2>
+      ${privacySetting("Push-уведомления", "О новых заданиях и тратах", "pushMissions")}
+      ${privacySetting("Аналитические советы", "Персональные рекомендации по бюджету", "aiTips")}
+      ${privacySetting("Родительский контроль", "Уведомления об операциях детей", "parentalControl")}
+    </section>
+
+    <section class="card">
+      <h2>О сервисе</h2>
+      <p class="muted">
+        «Семья+» — встроенный модуль ВТБ Онлайн для совместного управления семейным бюджетом
+        и развития финансовой грамотности детей.
+      </p>
+      <div class="tag-row">
+        <span class="tag">ML on-prem</span>
+        <span class="tag">anti-fraud</span>
+        <span class="tag">152-ФЗ</span>
+        <span class="tag">115-ФЗ</span>
+      </div>
+    </section>
+  `;
+}
+
+/* =========================================================
+   RENDER: CHILD — HOME
+   ========================================================= */
+function childHome() {
+  const teen = childForRole();
+  const percent = pct(state.childXP, state.childXPGoal);
+  const doneCount = state.missions.filter((m) => m.done).length;
+
+  return `
+    <section class="page-head">
+      <h1>Здравствуйте, ${teen.name.split(" ")[0]}</h1>
+      <p>Ваши задания, накопления и прогресс</p>
+    </section>
+
+    <section class="card balance-card">
+      <div class="row">
+        <span class="label">Моя карта · Семья+</span>
+        <span class="pill" style="background:rgba(255,255,255,0.15);color:#fff;border:0">активна</span>
+      </div>
+      <div class="amount">${money(teen.balance)}</div>
+      <div class="sub">
+        <span>Лимит: ${money(teen.limit)}</span>
+        <span>Доступно: ${money(teen.balance)}</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Прогресс <span class="right">${state.childXP} / ${state.childXPGoal} XP</span></h2>
+      <div class="progress success"><div style="width:${percent}%"></div></div>
+      <div class="level-row">
+        <div class="lvl">${state.childLevel}</div>
+        <div class="info">
+          <strong>Уровень ${state.childLevel}</strong>
+          <span>До уровня ${state.childLevel + 1}: ${state.childXPGoal - state.childXP} XP</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card insight-card">
+      <div class="title">${icon("trending", 15)} Совет</div>
+      <p>Вы выполнили ${doneCount} задания. Ещё одно — и откроется бейдж «Серия 7 дней».</p>
+    </section>
+
+    <section class="card">
+      <h2>Задания <button class="btn-link" data-tab="missions">Все</button></h2>
+      ${state.missions.slice(0, 2).map((m) => missionBlock(m, "child")).join("")}
+    </section>
+
+    <section class="card">
+      <h2>Цели <button class="btn-link" data-tab="goals">Все</button></h2>
+      ${goalBlock(state.goals[1], "child")}
+    </section>
+
+    <section class="card">
+      <h2>Награды</h2>
+      <div class="ach-grid">
+        ${state.childAchievements
+          .slice(0, 4)
+          .map(
+            (a) => `
+            <div class="ach ${a.done ? "" : "locked"}">
+              <div class="ic-wrap">${icon(a.icon, 18)}</div>
+              ${a.title}
+            </div>`
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+/* =========================================================
+   RENDER: CHILD — MISSIONS / GOALS / ACH / MORE
+   ========================================================= */
+function childMissions() {
+  return `
+    <section class="page-head">
+      <h1>Задания</h1>
+      <p>Выполняйте задания и получайте награды на карту</p>
+    </section>
+
+    <section class="card">
+      <h2>Активные <span class="right">${state.missions.filter((m) => !m.done).length} осталось</span></h2>
+      ${state.missions.map((m) => missionBlock(m, "child")).join("")}
+    </section>
+
+    <section class="card">
+      <h2>Награды</h2>
+      <div class="ach-grid">
+        ${state.childAchievements
+          .map(
+            (a) => `
+            <div class="ach ${a.done ? "" : "locked"}">
+              <div class="ic-wrap">${icon(a.icon, 18)}</div>
+              ${a.title}
+            </div>`
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function childGoals() {
+  return `
+    <section class="page-head">
+      <h1>Мои цели</h1>
+      <p>Копите вместе с семьёй</p>
+    </section>
+
+    <section class="card">
+      <h2>Семейные цели</h2>
+      ${state.goals.map((g) => goalBlock(g, "child")).join("")}
+    </section>
+
+    <section class="card insight-card">
+      <div class="title">${icon("trending", 15)} Как копить быстрее</div>
+      <p>
+        Откладывайте по 100 ₽ с каждой карманной суммы. Награды за задания
+        зачисляются на карту — часть можно сразу направить в цель.
+      </p>
+    </section>
+  `;
+}
+
+function childAchievements() {
+  return `
+    <section class="page-head">
+      <h1>Награды</h1>
+      <p>Открывайте новые бейджи и следите за прогрессом</p>
+    </section>
+
+    <section class="card">
+      <h2>Все бейджи</h2>
+      <div class="ach-grid" style="grid-template-columns:repeat(4,1fr)">
+        ${state.childAchievements
+          .map(
+            (a) => `
+            <div class="ach ${a.done ? "" : "locked"}" style="padding:14px 6px">
+              <div class="ic-wrap">${icon(a.icon, 22)}</div>
+              <div style="font-size:11px;line-height:1.25">${a.title}</div>
+            </div>`
+          )
+          .join("")}
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Прогресс <span class="right">${state.childXP} / ${state.childXPGoal} XP</span></h2>
+      <div class="progress success"><div style="width:${pct(state.childXP, state.childXPGoal)}%"></div></div>
+      <p class="muted">Бейдж «Серия 7 дней» открывается за 7 дней подряд с выполненным заданием.</p>
+    </section>
+  `;
+}
+
+function childMore() {
+  const mine = state.transactions.filter(
+    (t) => t.who === "Карина" || t.who === "Лиана" || t.cat === "gift"
+  );
+
+  return `
+    <section class="page-head">
+      <h1>Ещё</h1>
+      <p>История операций и обучение</p>
+    </section>
+
+    <section class="card">
+      <h2>История</h2>
+      ${mine
+        .map(
+          (t) => `
+          <div class="txn">
+            <div class="ic">${icon(t.icon, 16)}</div>
+            <div class="info">
+              <strong>${t.title}</strong>
+              <span>${t.date}</span>
+            </div>
+            <div class="amt ${t.amount < 0 ? "neg" : "pos"}">
+              ${t.amount > 0 ? "+" : ""}${money(t.amount)}
+            </div>
+          </div>`
+        )
+        .join("")}
+    </section>
+
+    <section class="card">
+      <h2>Финансовая грамотность</h2>
+      <p class="muted">Короткие уроки по 5 минут. Учитесь на практике.</p>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px">
+        <button class="btn secondary small" style="justify-content:flex-start" data-action="lesson" data-name="Что такое инфляция">
+          ${icon("book", 15)} Что такое инфляция
+        </button>
+        <button class="btn secondary small" style="justify-content:flex-start" data-action="lesson" data-name="Зачем нужен бюджет">
+          ${icon("book", 15)} Зачем нужен бюджет
+        </button>
+        <button class="btn secondary small" style="justify-content:flex-start" data-action="lesson" data-name="Как работают накопления">
+          ${icon("book", 15)} Как работают накопления
+        </button>
+      </div>
+    </section>
+  `;
+}
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function render() {
+  renderRoleSwitch();
+  renderNav();
+
+  if (state.role === "parent") {
+    if (state.tab === "home") app.innerHTML = parentHome();
+    else if (state.tab === "family") app.innerHTML = parentFamily();
+    else if (state.tab === "goals") app.innerHTML = parentGoals();
+    else if (state.tab === "missions") app.innerHTML = parentMissions();
+    else app.innerHTML = parentMore();
+    document.getElementById("topAvatar").textContent = "М";
+  } else {
+    if (state.tab === "home") app.innerHTML = childHome();
+    else if (state.tab === "missions") app.innerHTML = childMissions();
+    else if (state.tab === "goals") app.innerHTML = childGoals();
+    else if (state.tab === "ach") app.innerHTML = childAchievements();
+    else app.innerHTML = childMore();
+    document.getElementById("topAvatar").textContent = childForRole().initial;
+  }
+}
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+document.addEventListener("click", (e) => {
+  const roleBtn = e.target.closest("[data-role]");
+  if (roleBtn) { state.role = roleBtn.dataset.role; state.tab = "home"; render(); return; }
+
+  const tabBtn = e.target.closest("[data-tab]");
+  if (tabBtn) { state.tab = tabBtn.dataset.tab; render(); return; }
+
+  const filterBtn = e.target.closest("[data-filter]");
+  if (filterBtn) { state.filter = filterBtn.dataset.filter; render(); return; }
+
+  const toggle = e.target.closest("[data-toggle]");
+  if (toggle) {
+    const key = toggle.dataset.toggle;
+    state.settings[key] = !state.settings[key];
+    toggle.classList.toggle("on");
+    return;
+  }
+
+  const actionEl = e.target.closest("[data-action]");
+  if (!actionEl) return;
+  const action = actionEl.dataset.action;
+
+  switch (action) {
+    case "complete-mission": {
+      const id = +actionEl.dataset.missionId;
+      const m = state.missions.find((x) => x.id === id);
+      if (!m || m.done) return;
+      m.done = true;
+      const teen = childForRole();
+      teen.balance += m.reward;
+      state.childXP += 25;
+      if (state.childXP >= state.childXPGoal) {
+        state.childLevel++;
+        state.childXP -= state.childXPGoal;
+        toast(`Новый уровень: ${state.childLevel}`);
+      }
+      state.transactions.unshift({
+        icon: "gift", title: `Награда: ${m.title}`, cat: "gift",
+        amount: m.reward, who: teen.name.split(" ")[0], date: "Только что"
+      });
+      state.activity.unshift({
+        icon: "check", text: `${teen.name.split(" ")[0]} выполнил(а) задание «${m.title}»`, time: "Только что"
+      });
+      toast(`+${money(m.reward)} зачислено на карту`);
+      render();
+      break;
+    }
+
+    case "contribute-goal":
+    case "custom-contribute": {
+      const id = actionEl.dataset.goalId;
+      const goal = state.goals.find((g) => g.id === id);
+      if (!goal) return;
+      let amount = +actionEl.dataset.amount || 0;
+      if (action === "custom-contribute") {
+        const raw = prompt("Сумма пополнения, ₽:", "1000");
+        amount = Number(raw);
+        if (!amount || amount <= 0) return;
+      }
+      if (state.role === "child") {
+        const teen = childForRole();
+        if (teen.balance < amount) { toast("Недостаточно средств"); return; }
+        teen.balance -= amount;
+      }
+      goal.current = Math.min(goal.target, goal.current + amount);
+      toast(`+${money(amount)} в цель «${goal.title}»`);
+      render();
+      break;
+    }
+
+    case "create-task": {
+      const title = prompt("Название задания:");
+      if (!title) return;
+      const reward = Number(prompt("Сумма вознаграждения, ₽:", "100"));
+      if (!reward || reward <= 0) return;
+      state.missions.push({
+        id: Date.now(), title, desc: "Задание от родителя",
+        reward, done: false, tag: "задание"
+      });
+      toast("Задание создано");
+      render();
+      break;
+    }
+
+    case "new-goal": {
+      const title = prompt("Название цели:");
+      if (!title) return;
+      const target = Number(prompt("Целевая сумма, ₽:", "50000"));
+      if (!target || target <= 0) return;
+      state.goals.push({
+        id: "g" + Date.now(), title, icon: "target", target, current: 0, deadline: "2026"
+      });
+      toast("Цель создана");
+      render();
+      break;
+    }
+
+    case "save-limit": {
+      const mid = +actionEl.dataset.memberId;
+      const input = document.querySelector(`[data-limit-input="${mid}"]`);
+      const val = Number(input.value);
+      if (!Number.isFinite(val) || val < 0) return;
+      state.family.find((x) => x.id === mid).limit = val;
+      toast("Лимит обновлён");
+      render();
+      break;
+    }
+
+    case "topup-card": {
+      const mid = +actionEl.dataset.memberId;
+      const m = state.family.find((x) => x.id === mid);
+      m.balance += 500;
+      state.transactions.unshift({
+        icon: "card", title: "Пополнение карты", cat: "gift",
+        amount: 500, who: "Марат", date: "Только что"
+      });
+      toast("+500 ₽ на карту");
+      render();
+      break;
+    }
+
+    case "block-card": {
+      const mid = +actionEl.dataset.memberId;
+      const m = state.family.find((x) => x.id === mid);
+      toast(`Карта ${m.name.split(" ")[0]} заморожена`);
+      break;
+    }
+
+    case "invite-member": {
+      const name = prompt("Имя участника:");
+      if (!name) return;
+      state.family.push({
+        id: Date.now(), name, role: "child", initial: name[0].toUpperCase(),
+        balance: 0, limit: 1000, tag: "Новый участник"
+      });
+      toast("Участник добавлен");
+      render();
+      break;
+    }
+
+    case "auto-save": { toast("Автоплатёж включён: 11 000 ₽ / мес"); break; }
+    case "lesson": { toast(`Открыт урок: ${actionEl.dataset.name}`); break; }
+  }
+});
+
+document.addEventListener("input", (e) => {
+  if (e.target.matches("[data-search]")) {
+    state.searchQuery = e.target.value;
+    render();
+    const input = document.querySelector("[data-search]");
+    if (input) {
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  }
+});
+
+$("#btnNotif").addEventListener("click", () => {
+  sheetInner.innerHTML = `
+    <div class="sheet-handle"></div>
+    <h2 style="margin:0 0 8px; font-size:16px; font-weight:600">Уведомления</h2>
+    ${state.notifications
+      .map(
+        (n) => `
+        <div class="notif">
+          <div class="n-ic">${icon(n.icon, 15)}</div>
+          <div>
+            <strong>${n.title}</strong>
+            <p>${n.text}</p>
+          </div>
+        </div>`
+      )
+      .join("")}
+  `;
+  sheet.classList.add("open");
+});
+
+sheet.addEventListener("click", (e) => {
+  if (e.target === sheet) sheet.classList.remove("open");
+});
+
+$("#btnSearch").addEventListener("click", () => {
+  state.role = "parent";
+  state.tab = "more";
+  render();
+  setTimeout(() => {
+    const input = document.querySelector("[data-search]");
+    if (input) input.focus();
+  }, 80);
+});
+
+render();
+</script>
+</body>
+</html>
